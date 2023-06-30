@@ -1,11 +1,10 @@
 require "build_string"
 
-
 describe BuildString do
     # Reminder: use . in front of class methods, and # in front of instance methods.
     describe ".build" do 
         context "given an empty string" do
-        # it keyword marks specific test case/ expected behavior
+        # it keyword marks specific test case/expected behavior
           it "returns empty string" do
             expect(BuildString.build("")).to eq("")
           end
