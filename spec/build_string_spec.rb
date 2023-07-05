@@ -14,7 +14,7 @@ describe BuildString do
   end
 
   describe "#get_elements" do
-    context "given a rhyme as a string and successfully extracts elements of rhyme" do
+    context "given a rhyme as a string, if method successfully extracts elements of rhyme" do
       it "returns true" do
         string = "This is the house that Jack built.\nThis is the malt that lay in the house that Jack built.\nThis is the rat that ate the malt that lay in the house that Jack built.\nThis is the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the horse and the hound and the horn that belonged to the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built."
 
@@ -41,14 +41,14 @@ describe BuildString do
       end
     end
 
-    context "given an invalid rhyme as a string (has 'es')" do
+    context "given an invalid rhyme as a string: has 'es' " do
       it "returns false" do
         string = "This is the man all tattered and torn that kissed.\nThis es the horse and the hound and the horn that belonged to the man all tattered and torn that kissed.\nThis is the cat that killed the horse and the hound and the horn that belonged to the man all tattered and torn that kissed."
         expect(jack_house.validate_rhyme(string)).to eq(false)
       end
     end
 
-    context "given an invalid rhyme as a string (has 'cow')" do
+    context "given an invalid rhyme as a string: has 'cow' " do
       it "returns false" do
         string = "This is the man all tattered and torn that kissed.\nThis is the cow and the hound and the horn that belonged to the man all tattered and torn that kissed.\nThis is the cat that killed the horse and the hound and the horn that belonged to the man all tattered and torn that kissed."
         expect(jack_house.validate_rhyme(string)).to eq(false)
@@ -57,6 +57,10 @@ describe BuildString do
 
   end
 
+  # Note: if the string has few elements, like two, it is very likely that the
+  # randomized rhyme will equal the original. Future work: create a new function that 
+  # ensures the randomized rhyme is not equal to the original regardless of the number 
+  # of elements in the rhyme.
   describe "#randomize_rhyme" do
     context "given a randomized rhyme with valid patterns" do
       it "returns true" do
