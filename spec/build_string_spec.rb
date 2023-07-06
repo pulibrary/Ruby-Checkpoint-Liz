@@ -16,7 +16,6 @@ describe BuildString do
   describe "#get_elements" do
     context "given a rhyme as a string, if method successfully extracts elements of rhyme" do
       it "returns true" do
-        string = "This is the house that Jack built.\nThis is the malt that lay in the house that Jack built.\nThis is the rat that ate the malt that lay in the house that Jack built.\nThis is the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built.\nThis is the horse and the hound and the horn that belonged to the farmer sowing his corn that kept the rooster that crowed in the morn that woke the priest all shaven and shorn that married the man all tattered and torn that kissed the maiden all forlorn that milked the cow with the crumpled horn that tossed the dog that worried the cat that killed the rat that ate the malt that lay in the house that Jack built."
 
         elements_array = ["the house that Jack built", "the malt that lay in",
         "the rat that ate", "the cat that killed", "the dog that worried", 
@@ -25,7 +24,7 @@ describe BuildString do
         "the rooster that crowed in the morn that woke", "the farmer sowing his corn that kept",
         "the horse and the hound and the horn that belonged to"]
         
-        expect(jack_house.get_elements(string)).to eq(elements_array)
+        expect(jack_house.get_elements).to eq(elements_array)
       end 
     end
   end
@@ -64,8 +63,7 @@ describe BuildString do
   describe "#randomize_rhyme" do
     context "given a randomized rhyme with valid patterns" do
       it "returns true" do
-        string = "This is the man all tattered and torn that kissed.\nThis is the horse and the hound and the horn that belonged to the man all tattered and torn that kissed.\nThis is the cat that killed the horse and the hound and the horn that belonged to the man all tattered and torn that kissed."
-        randomized = jack_house.randomize_rhyme(string)
+        randomized = jack_house.randomize_rhyme
         expect(jack_house.validate_rhyme(randomized)).to eq(true)
       end
     end
