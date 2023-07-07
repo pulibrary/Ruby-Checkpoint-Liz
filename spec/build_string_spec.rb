@@ -34,15 +34,16 @@ describe BuildString do
     context 'given a valid rhyme as a string' do
       it 'returns true' do
         string = "This is the man all tattered and torn that kissed.\nThis is the horse and the hound and the horn that belonged to the man all tattered and torn that kissed.\nThis is the cat that killed the horse and the hound and the horn that belonged to the man all tattered and torn that kissed."
-
         expect(jack_house.validate_rhyme(string)).to eq(true)
       end
     end
 
     context "given an invalid rhyme as a string " do
       it 'returns false' do
+        # error: has 'es'
         string_one = "This is the man all tattered and torn that kissed.\nThis es the horse and the hound and the horn that belonged to the man all tattered and torn that kissed.\nThis is the cat that killed the horse and the hound and the horn that belonged to the man all tattered and torn that kissed."
         expect(jack_house.validate_rhyme(string_one)).to eq(false)
+        # error has 'cow'
         string_two = "This is the man all tattered and torn that kissed.\nThis is the cow and the hound and the horn that belonged to the man all tattered and torn that kissed.\nThis is the cat that killed the horse and the hound and the horn that belonged to the man all tattered and torn that kissed."
         expect(jack_house.validate_rhyme(string_two)).to eq(false)
       end
@@ -65,6 +66,15 @@ describe BuildString do
       it 'returns false' do
         randomized = "This is the man all tattered and torn that kissed.\nThis is the horse and the hound and the horn that belonged to the woman all tattered and torn that kissed.\nThis is the cat that killed the horse and the hound and the horn that belonged to the man all tattered and torn that kissed."
         expect(jack_house.validate_rhyme(randomized)).to eq(false)
+      end
+    end
+  end
+
+  describe '#semi_randomize_rhyme' do
+    context 'given a semi-randomized rhyme that ends with \'the house that Jack built.\' ' do
+      it 'returns true' do
+        semi_random_rhyme = jack_house.semi_randomize_rhyme
+        expect(jack_house.validate_semi_random_rhyme(semi_random_rhyme)).to eq(true)
       end
     end
   end

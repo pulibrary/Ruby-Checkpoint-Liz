@@ -27,7 +27,7 @@ class BuildString
     elements
   end
 
-  # returns "new" element within 1 line of rhyme,
+  # returns new element within 1 line of rhyme,
   # i.e. excludes "This is" and repeated elements from previous lines.
   def get_element_in_line(diff, words, prev_length)
     element = []
@@ -44,6 +44,42 @@ class BuildString
     [string, prev_length]
   end
 
+  # given a rhyme as a string, return semi-random version that ends with
+  # “the house that Jack built.” at the end of the entire rhyme.
+  def semi_randomize_rhyme
+    elements = get_elements
+
+    # shuffle method does not modify the original array in place, it returns a modified version.
+    shuffled_elements = elements.shuffle
+
+    # return the resulting string of rhyme with randomized order of elements,
+    # excluding the final newline char
+    concat_elements(shuffled_elements, semi: true)
+  end
+
+  # checks that semi-randomized rhyme 'string' ends with 'the house that Jack built.'
+  def validate_semi_random_rhyme(string)
+    lines = string.each_line.to_a
+    # words in the last line of rhyme
+    last_line = lines[-1].split
+    last_line_length = last_line.length
+
+    check = 'the house that Jack built.'
+    check_words = check.split
+
+    # 'check' phrase length is 5 words
+    diff = last_line_length - 5
+    j = 0
+    last_phrase = last_line[diff..]
+
+    last_phrase.each do |word|
+      return false if word != check_words[j]
+
+      j += 1
+    end
+    true
+  end
+
   # given a rhyme as a string, return randomized version.
   def randomize_rhyme
     elements = get_elements
@@ -56,13 +92,16 @@ class BuildString
   end
 
   # helper method of randomize_rhyme to maintain pattern despite being random
-  def concat_elements(shuffled_elements)
+  def concat_elements(shuffled_elements, semi: false)
     output = ''
     saved = ''
     shuffled_elements.each do |element|
       if saved == ''
         output += "This is #{element}.\n"
         saved = element.to_s
+      elsif shuffled_elements.last == element && semi == true
+        output += "This is #{element} #{saved} the house that Jack built."
+        return output
       else
         output += "This is #{element} #{saved}.\n "
         saved = "#{element} #{saved}"
@@ -85,7 +124,7 @@ class BuildString
       return false unless validate_first_words(words)
       return false unless validate_last_part(words, saved, diff, line_length)
 
-      saved = validate_save_middle_part(line_length, words)
+      saved = save_middle_part(line_length, words)
       saved_length = saved.length
     end
     true
@@ -111,8 +150,8 @@ class BuildString
     true
   end
 
-  # save middle part of line (new component of rhyme)
-  def validate_save_middle_part(line_length, words)
+  # save middle part of line (new component of rhyme) to concat to next line
+  def save_middle_part(line_length, words)
     saved = []
     i = 2
     while i < line_length
