@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# generates non-random and random rhyme based on Jack House's rhyme.
 class BuildString
   attr_reader :rhyme
 
@@ -93,6 +94,7 @@ class BuildString
   # check "This" and "is" are the two first words
   def validate_first_words(words)
     return false if words[0] != 'This' || words[1] != 'is'
+
     true
   end
 

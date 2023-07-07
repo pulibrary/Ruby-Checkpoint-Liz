@@ -1,0 +1,26 @@
+AllCops:
+  DisplayCopNames: true
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.2.2
+
+Style/StringLiterals:
+  Enabled: false
+
+
+Layout/LineLength:
+  Exclude:
+    - spec/build_string_spec.rb
+    - lib/build_string.rb
+
+Naming/AccessorMethodName:
+  Exclude:
+    - lib/build_string.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - lib/build_string.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/build_string_spec.rb

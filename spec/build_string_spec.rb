@@ -47,7 +47,6 @@ describe BuildString do
         expect(jack_house.validate_rhyme(string_two)).to eq(false)
       end
     end
-
   end
 
   # NOTE: if the string has few elements, like two, it is very likely that the
